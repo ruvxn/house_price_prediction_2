@@ -75,12 +75,15 @@ plt.title('Model Predictions vs True Values')
 plt.show()
 
 
-RMSE = np.sqrt(tf.keras.losses.mean_squared_error(y_test_original, y_predict_original))
-MSE = np.sqrt(mean_squared_error(y_test_original, y_predict_original))
-MAE = tf.keras.losses.mean_absolute_error(y_test_original, y_predict_original)
-R2 = tf.keras.losses.r2_score(y_test_original, y_predict_original)
-adj_R2 = 1 - (1-R2)*(len(y_test_original)-1)/(len(y_test_original)-X_test.shape[1]-1)
 
+MSE = np.sqrt(mean_squared_error(y_test_original, y_predict_original))
+
+from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+RMSE = np.sqrt(mean_squared_error(y_test_original, y_predict_original))  
+MAE = mean_absolute_error(y_test_original, y_predict_original) 
+R2 = r2_score(y_test_original, y_predict_original)  
+
+adj_R2 = 1 - (1 - R2) * (len(y_test_original) - 1) / (len(y_test_original) - X_test.shape[1] - 1)
 
 print(f"""
 Model Performance Metrics:
